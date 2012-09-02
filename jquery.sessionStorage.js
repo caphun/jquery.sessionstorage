@@ -15,7 +15,15 @@
 ;(function( $, window, document, undefined ) {
 
     // cached values
-    var pluginName = 'sessionStorage';
+    var pluginName = 'sessionStorage',
+        hasSessionStorage = false;
+
+    // detect sessionStorage support, see: http://dustindiaz.com/javascript-cache-provider
+    try {
+      hasSessionStorage = ('sessionStorage' in window) && window['sessionStorage'] !== null;
+    } catch (ex) {
+      // do nothing
+    }
 
     $.fn[pluginName] = function(options) {
         var args = arguments, values = [];
@@ -75,21 +83,13 @@
         init: function() {
         },
         set: function(k, v) {
-            this._hasSessionStorage() && sessionStorage.setItem(k, JSON.stringify(v));
+            hasSessionStorage && sessionStorage.setItem(k, JSON.stringify(v));
         },
         get: function(k) {
-            return this._hasSessionStorage() ? JSON.parse(sessionStorage.getItem(k)) : null;
+            return hasSessionStorage ? JSON.parse(sessionStorage.getItem(k)) : null;
         },
         destroy: function(k) {
-            this._hasSessionStorage() && sessionStorage.removeItem(k);
-        },
-        // see: http://dustindiaz.com/javascript-cache-provider
-        _hasSessionStorage: function() {
-            try {
-                return ('sessionStorage' in window) && window['sessionStorage'] !== null;
-            } catch (ex) {
-                return false;
-            }
+            hasSessionStorage && sessionStorage.removeItem(k);
         }
     }
 
