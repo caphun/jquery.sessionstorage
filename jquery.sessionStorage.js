@@ -59,7 +59,7 @@
     }
 
     $.sessionStorage = function(elem, options) {
-        this.optins = $.extend(true, {}, $.sessionStorage.defaults, options);
+        this.options = $.extend(true, {}, $.sessionStorage.defaults, options);
         this.element = $(elem);
         this.init();
     }
