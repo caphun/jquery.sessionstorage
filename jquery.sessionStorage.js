@@ -15,9 +15,9 @@
 ;(function( $, window, document, undefined ) {
 
     // cached values
-    var namespace = '.sessionStorage';
+    var pluginName = 'sessionStorage';
 
-    $.fn.sessionStorage = function(options) {
+    $.fn[pluginName] = function(options) {
         var args = arguments, values = [];
 
         this.each(function() {
@@ -58,12 +58,12 @@
 
     $.sessionStorage.getInstance = function(elem, options) {
         return ($.sessionStorage.initialized(elem))
-            ? $(elem).data('widget'+namespace)
+            ? $(elem).data('widget.'+pluginName)
             : new $.sessionStorage(elem, options);
     }
 
     $.sessionStorage.initialized = function (elem) {
-        var init = $( elem).data('init'+namespace);
+        var init = $( elem).data('init.'+pluginName);
         return init !== undefined && init !== null ? true : false;
     }
 
