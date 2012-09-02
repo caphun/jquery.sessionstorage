@@ -12,7 +12,7 @@
  *
  */
 
-(function( $, window, document, undefined ){
+;(function( $, window, document, undefined ) {
 
     // cached values
     var namespace = '.sessionStorage';
