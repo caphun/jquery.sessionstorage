@@ -12,7 +12,8 @@
  *
  */
 
-(function($){
+(function( $, window, document, undefined ){
+
     // cached values
     var namespace = '.sessionStorage';
 
@@ -45,10 +46,8 @@
     }
 
     // wrapper for the destroy method
-    $.fn.removeSessionStorage = function(options) {
-        return this.each(function() {
-            $(this).sessionStorage('destroy', options);
-        });
+    $.fn.removeSessionStorage = function(key) {
+        return this.sessionStorage('destroy', key);
     }
 
     $.sessionStorage = function(elem, options) {
@@ -94,4 +93,4 @@
         }
     }
 
-})(jQuery);
+})( jQuery, window, document );
